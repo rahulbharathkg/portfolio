@@ -4,7 +4,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rahul Bharath | Portfolio</title>
+  <title>Rahul Bharath | Senior Commissioning & Project Engineer</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Senior Commissioning & Project Engineer specializing in crossbelt sorter systems, SCADA, and warehouse automation. Delivered projects for Amazon, Zara, DHL across Europe and USA." />
+  <meta name="keywords"
+    content="Rahul Bharath, Commissioning Engineer, Project Engineer, Crossbelt Sorter, SCADA, PLC, Automation, Warehouse, Dematic, ALTEN" />
+  <meta name="author" content="Rahul Bharath Krishni Gurumoorthy" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rahulbharathkg.github.io/portfolio/" />
+  <meta property="og:title" content="Rahul Bharath | Senior Commissioning & Project Engineer" />
+  <meta property="og:description"
+    content="Expert in Crossbelt Sorter Systems, Data Analysis, SCADA, and field commissioning. Delivered projects for Amazon, Zara, DHL, and more." />
+  <meta property="og:image" content="photo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://rahulbharathkg.github.io/portfolio/" />
+  <meta property="twitter:title" content="Rahul Bharath | Senior Commissioning & Project Engineer" />
+  <meta property="twitter:description"
+    content="Expert in Crossbelt Sorter Systems, Data Analysis, SCADA, and field commissioning." />
+  <meta property="twitter:image" content="photo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,30 +40,256 @@
       darkMode: 'class',
       theme: {
         extend: {
-          colors: { accent: '#5AC8FA', highlight: '#f97316', darkbg: '#1f2937' },
-          animation: { fadeIn: 'fadeIn 1s ease-in-out', slideIn: 'slideIn 0.8s ease-out' },
+          colors: {
+            accent: '#5AC8FA',
+            highlight: '#f97316',
+            darkbg: '#1f2937',
+            primary: '#667eea',
+            secondary: '#764ba2'
+          },
+          animation: {
+            fadeIn: 'fadeIn 1s ease-in-out',
+            slideIn: 'slideIn 0.8s ease-out',
+            float: 'float 3s ease-in-out infinite',
+            pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            slideInLeft: 'slideInLeft 0.8s ease-out',
+            slideInRight: 'slideInRight 0.8s ease-out',
+            scaleIn: 'scaleIn 0.5s ease-out'
+          },
           keyframes: {
             fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
-            slideIn: { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } }
+            slideIn: { '0%': { opacity: 0, transform: 'translateY(30px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-20px)' } },
+            slideInLeft: { '0%': { opacity: 0, transform: 'translateX(-50px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } },
+            slideInRight: { '0%': { opacity: 0, transform: 'translateX(50px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } },
+            scaleIn: { '0%': { opacity: 0, transform: 'scale(0.9)' }, '100%': { opacity: 1, transform: 'scale(1)' } }
           }
         }
       }
     };
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
-    html, body { scroll-behavior: smooth; font-family: 'Segoe UI', sans-serif; }
-    .section-title { @apply text-3xl font-bold text-accent mb-6; }
-    .tab-btn { @apply px-4 py-2 rounded-lg font-semibold transition; }
-    .tab-btn.active { @apply bg-accent text-white; }
-    .experience-card { @apply grid grid-cols-1 md:grid-cols-2 gap-8 items-center opacity-0; }
-    .experience-card.active { @apply opacity-100 animate-fadeIn; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    html,
+    body {
+      scroll-behavior: smooth;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    .section-title {
+      @apply text-3xl font-bold text-accent mb-6;
+    }
+
+    .tab-btn {
+      @apply px-4 py-2 rounded-lg font-semibold transition;
+    }
+
+    .tab-btn.active {
+      @apply bg-accent text-white;
+    }
+
+    .experience-card {
+      @apply grid grid-cols-1 md:grid-cols-2 gap-8 items-center opacity-0;
+    }
+
+    .experience-card.active {
+      @apply opacity-100 animate-fadeIn;
+    }
+
+    /* Particle Background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #5AC8FA;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Glassmorphism Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Hover Glow Effect */
+    .hover-glow {
+      transition: all 0.3s ease;
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(90, 200, 250, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      z-index: 9999;
+      transition: width 0.1s ease;
+    }
+
+    /* Custom Cursor */
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #5AC8FA;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transition: all 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .custom-cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: #5AC8FA;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10001;
+      transition: all 0.1s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .custom-cursor.hover {
+      width: 40px;
+      height: 40px;
+      background: rgba(90, 200, 250, 0.1);
+      border-color: #667eea;
+    }
+
+    /* Card Tilt Effect */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+
+    .tilt-card:hover {
+      transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale(1.02);
+    }
+
+    /* Magnetic Button */
+    .magnetic-btn {
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Enhanced Glassmorphism */
+    .glass-enhanced {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animated Counter */
+    .counter {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Gradient Border Animation */
+    @keyframes gradient-border {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .gradient-border {
+      background: linear-gradient(90deg, #667eea, #764ba2, #5AC8FA, #667eea);
+      background-size: 300% 300%;
+      animation: gradient-border 3s ease infinite;
+    }
+
+    /* Ripple Effect */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .ripple:active::after {
+      width: 300px;
+      height: 300px;
+    }
   </style>
 </head>
+
 <body class="bg-white text-gray-800 dark:bg-darkbg dark:text-white transition-colors">
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Particle Background -->
+  <div class="particles" id="particles"></div>
+
   <!-- Sidebar -->
-  <aside class="fixed top-0 left-0 h-full w-64 bg-gray-900 text-white py-6 hidden lg:flex flex-col items-center z-50">
+  <aside
+    class="fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white py-6 hidden lg:flex flex-col items-center z-50 shadow-2xl">
     <h2 class="text-xl font-bold mb-1">Rahul Bharath</h2>
     <p class="text-sm text-gray-300">Automation & Project Specialist</p>
     <nav class="mt-10 space-y-4 w-full">
@@ -51,18 +304,30 @@
   </aside>
 
   <!-- Dark Mode Toggle -->
-  <button onclick="document.documentElement.classList.toggle('dark')" class="fixed top-4 right-4 bg-accent text-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform">🌙</button>
+  <button onclick="document.documentElement.classList.toggle('dark')"
+    class="fixed top-4 right-4 bg-accent text-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform">🌙</button>
 
   <main class="lg:ml-64">
 
     <!-- HOME -->
-    <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-blue-100 via-orange-50 to-purple-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 relative">
-      <img src="photo.jpg" alt="Rahul Bharath" class="w-48 h-auto shadow-lg mb-6 object-cover">
+    <section id="home"
+      class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-br from-blue-100 via-orange-50 to-purple-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 relative">
+      <img src="photo.png" alt="Rahul Bharath" class="w-48 h-auto shadow-lg mb-6 object-cover">
       <h1 class="text-4xl md:text-5xl font-bold text-accent animate-fadeIn">Rahul Bharath Krishni Gurumoorthy</h1>
       <p class="text-xl mt-2 animate-fadeIn">Senior Project &amp; Commissioning Engineer</p>
       <p class="max-w-xl mt-4 text-gray-600 dark:text-gray-300 animate-fadeIn leading-relaxed">
-        Expert in Crossbelt Sorter Systems, Data Analysis, SCADA, and field commissioning. Delivered projects for global clients including Amazon, Zara, DHL etc.
+        Expert in Crossbelt Sorter Systems, Data Analysis, SCADA, and field commissioning. Delivered projects for global
+        clients including Amazon, Zara, DHL etc.
       </p>
+
+      <!-- Resume Download Button -->
+      <div class="flex justify-center mt-8 animate-fadeIn">
+        <a href="RAHUL BHARATH KRISHNI GURUMOORTHY - Resume.pdf" download
+          class="px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-accent/50 hover:scale-110 transition-all duration-300 flex items-center gap-3">
+          <i class="fas fa-download text-xl"></i> Download Resume
+        </a>
+      </div>
+
       <!-- Scroll Indicator -->
       <div class="absolute bottom-8 animate-bounce">
         <a href="#profile" class="text-accent text-2xl"><i class="fas fa-chevron-down"></i></a>
@@ -70,610 +335,837 @@
     </section>
 
 
-	
-	    <!-- Add these to your <head> under your existing <style> block: -->
-<style>
-  html, body {
-    height: 100%;
-    overflow: hidden;             /* Lock global scrolling */
-  }
-  main {
-    height: 100%;
-    overflow-y: auto;             /* Scroll only inside <main> */
-    scroll-snap-type: y mandatory; /* Enable vertical snap */
-  }
-  section {
-    scroll-snap-align: start;     /* Snap each section to top */
-    min-height: 100vh;            /* Exactly one viewport tall */
-  }
-</style>
 
-<section
-  id="profile"
-  class="min-h-screen bg-gradient-to-b from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900
-         flex flex-col justify-center py-20 px-6"
-  style="scroll-snap-align: start;"
->
-  <!-- Section Title -->
-  <h2 class="text-3xl font-bold text-accent mb-12 text-center animate-fadeIn">
-    <i class="fas fa-user-circle mr-2"></i>Profile
-  </h2>
 
-  <!-- Two‑Media Row -->
-  <div class="grid grid-cols-2 gap-6 mb-12 animate-slideIn">
-    <!-- Video: Cross‑continent experience -->
-    <div class="flex flex-col">
-      <div class="w-full h-60 rounded-lg overflow-hidden shadow-lg">
-        <video
-          src="handshake.mp4"
-          autoplay muted loop playsinline
-          class="w-full h-full object-cover"
-        ></video>
-      </div>
-      <p class="mt-4 text-center text-gray-700 dark:text-gray-300">
-        Worked across continents, gaining deep technical expertise and people‑management skills.
-      </p>
-    </div>
+    <!-- Scroll Snap Styling -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
 
-    <!-- Image: Project Management -->
-    <div class="flex flex-col">
-      <div class="w-full h-60 rounded-lg overflow-hidden shadow-lg">
-        <img
-          src="project-management.jpg"
-          alt="Project Management"
-          class="w-full h-full object-cover"
-        />
-      </div>
-      <p class="mt-4 text-center text-gray-700 dark:text-gray-300">
-        Delivered all projects successfully, achieving high customer satisfaction.
-      </p>
-    </div>
-  </div>
+      main {
+        height: 100%;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+      }
 
-  <!-- Content Cards -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-    <!-- Languages Card -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8
-             hover:shadow-2xl transition-transform transform hover:scale-105"
-    >
-      <h3 class="text-2xl font-semibold mb-6">Languages</h3>
-      <div class="space-y-4">
-        <!-- English -->
-        <div>
-          <p class="font-medium">English <span class="text-sm text-gray-500">(Fluent)</span></p>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
-            <div class="bg-accent h-3 rounded-full" style="width:100%"></div>
+      /* Only apply full height to main sections, not stats */
+      section#home,
+      section#profile,
+      section#experience,
+      section#education,
+      section#projects,
+      section#skills,
+      section#contact {
+        scroll-snap-align: start;
+        min-height: 100vh;
+      }
+
+      /* Stats section should NOT be full height */
+      section#stats {
+        scroll-snap-align: none;
+      }
+    </style>
+
+    <section id="profile" class="min-h-screen bg-gradient-to-b from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900
+         flex flex-col justify-center py-20 px-6" style="scroll-snap-align: start;">
+      <!-- Section Title -->
+      <h2 class="text-3xl font-bold text-accent mb-12 text-center animate-fadeIn">
+        <i class="fas fa-user-circle mr-2"></i>Profile
+      </h2>
+
+      <!-- Two‑Media Row -->
+      <div class="grid grid-cols-2 gap-6 mb-12 animate-slideIn">
+        <!-- Video: Cross‑continent experience -->
+        <div class="flex flex-col">
+          <div class="w-full h-60 rounded-lg overflow-hidden shadow-lg">
+            <video src="handshake.mp4" autoplay muted loop playsinline class="w-full h-full object-cover"></video>
           </div>
+          <p class="mt-4 text-center text-gray-700 dark:text-gray-300">
+            Worked across continents, gaining deep technical expertise and people‑management skills.
+          </p>
         </div>
-        <!-- Italian -->
-        <div>
-          <p class="font-medium">Italian <span class="text-sm text-gray-500">(Intermediate)</span></p>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
-            <div class="bg-accent h-3 rounded-full" style="width:65%"></div>
+
+        <!-- Image: Project Management -->
+        <div class="flex flex-col">
+          <div class="w-full h-60 rounded-lg overflow-hidden shadow-lg">
+            <img src="project-management.jpg" alt="Project Management" class="w-full h-full object-cover" />
           </div>
-        </div>
-        <!-- German -->
-        <div>
-          <p class="font-medium">German <span class="text-sm text-gray-500">(A1)</span></p>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
-            <div class="bg-accent h-3 rounded-full" style="width:25%"></div>
-          </div>
-        </div>
-        <!-- Tamil & Telugu -->
-        <div>
-          <p class="font-medium">Tamil &amp; Telugu <span class="text-sm text-gray-500">(Native)</span></p>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
-            <div class="bg-accent h-3 rounded-full" style="width:100%"></div>
-          </div>
-        </div>
-        <!-- Hindi -->
-        <div>
-          <p class="font-medium">Hindi <span class="text-sm text-gray-500">(Fluent)</span></p>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
-            <div class="bg-accent h-3 rounded-full" style="width:90%"></div>
-          </div>
+          <p class="mt-4 text-center text-gray-700 dark:text-gray-300">
+            Delivered all projects successfully, achieving high customer satisfaction.
+          </p>
         </div>
       </div>
-    </div>
 
-    <!-- Documents & License Card -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8
-             hover:shadow-2xl transition-transform transform hover:scale-105"
-    >
-      <h3 class="text-2xl font-semibold mb-6">Travel Documents &amp; License</h3>
-      <ul class="space-y-6">
-        <li class="flex items-start">
-          <i class="fas fa-passport text-accent text-2xl mt-1 mr-4"></i>
-          <div>
-            <p class="font-medium">Europe Permanent Resident</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              Expires: <span class="font-semibold">2033</span>
-            </p>
+      <!-- Content Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Languages Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8
+             hover:shadow-2xl transition-transform transform hover:scale-105">
+          <h3 class="text-2xl font-semibold mb-6">Languages</h3>
+          <div class="space-y-4">
+            <!-- English -->
+            <div>
+              <p class="font-medium">English <span class="text-sm text-gray-500">(Fluent)</span></p>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
+                <div class="bg-accent h-3 rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+            <!-- Italian -->
+            <div>
+              <p class="font-medium">Italian <span class="text-sm text-gray-500">(Intermediate)</span></p>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
+                <div class="bg-accent h-3 rounded-full" style="width:65%"></div>
+              </div>
+            </div>
+            <!-- German -->
+            <div>
+              <p class="font-medium">German <span class="text-sm text-gray-500">(A1)</span></p>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
+                <div class="bg-accent h-3 rounded-full" style="width:25%"></div>
+              </div>
+            </div>
+            <!-- Tamil & Telugu -->
+            <div>
+              <p class="font-medium">Tamil &amp; Telugu <span class="text-sm text-gray-500">(Native)</span></p>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
+                <div class="bg-accent h-3 rounded-full" style="width:100%"></div>
+              </div>
+            </div>
+            <!-- Hindi -->
+            <div>
+              <p class="font-medium">Hindi <span class="text-sm text-gray-500">(Fluent)</span></p>
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mt-1">
+                <div class="bg-accent h-3 rounded-full" style="width:90%"></div>
+              </div>
+            </div>
           </div>
-        </li>
-        <li class="flex items-start">
-          <i class="fas fa-flag-usa text-accent text-2xl mt-1 mr-4"></i>
-          <div>
-            <p class="font-medium">USA B1/B2 Visa</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              Expires: <span class="font-semibold">2033</span>
-            </p>
+        </div>
+
+        <!-- Documents & License Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8
+             hover:shadow-2xl transition-transform transform hover:scale-105">
+          <h3 class="text-2xl font-semibold mb-6">Travel Documents &amp; License</h3>
+          <ul class="space-y-6">
+            <li class="flex items-start">
+              <i class="fas fa-passport text-accent text-2xl mt-1 mr-4"></i>
+              <div>
+                <p class="font-medium">Europe Permanent Resident</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Expires: <span class="font-semibold">2033</span>
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-flag-usa text-accent text-2xl mt-1 mr-4"></i>
+              <div>
+                <p class="font-medium">USA B1/B2 Visa</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Expires: <span class="font-semibold">2033</span>
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-flag-canada text-accent text-2xl mt-1 mr-4"></i>
+              <div>
+                <p class="font-medium">Canada Visitor Visa</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Expires: <span class="font-semibold">2034</span>
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-id-card text-accent text-2xl mt-1 mr-4"></i>
+              <div>
+                <p class="font-medium">India: Citizen</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-car text-accent text-2xl mt-1 mr-4"></i>
+              <div>
+                <p class="font-medium">Driving License</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Car &amp; Bike Holder
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATISTICS SECTION -->
+    <section id="stats" class="bg-white dark:bg-gray-900 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-accent mb-12 text-center reveal">
+          <i class="fas fa-chart-line mr-2"></i>Career Highlights
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <!-- Stat 1: Years of Experience -->
+          <div
+            class="text-center p-8 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 tilt-card reveal">
+            <i class="fas fa-briefcase text-5xl text-primary mb-4"></i>
+            <div class="text-5xl font-bold gradient-text counter" data-target="6">0</div>
+            <p class="text-sm mt-2 text-gray-600 dark:text-gray-300 font-semibold">Years Experience</p>
           </div>
-        </li>
-        <li class="flex items-start">
-          <i class="fas fa-flag-canada text-accent text-2xl mt-1 mr-4"></i>
-          <div>
-            <p class="font-medium">Canada Visitor Visa</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              Expires: <span class="font-semibold">2034</span>
-            </p>
+
+          <!-- Stat 2: Projects Completed -->
+          <div
+            class="text-center p-8 bg-gradient-to-br from-accent/10 to-primary/10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 tilt-card reveal">
+            <i class="fas fa-check-circle text-5xl text-accent mb-4"></i>
+            <div class="text-5xl font-bold gradient-text counter" data-target="15">0</div>
+            <p class="text-sm mt-2 text-gray-600 dark:text-gray-300 font-semibold">Projects Completed</p>
           </div>
-        </li>
-        <li class="flex items-start">
-          <i class="fas fa-id-card text-accent text-2xl mt-1 mr-4"></i>
-          <div>
-            <p class="font-medium">India: Citizen</p>
+
+          <!-- Stat 3: Countries Worked -->
+          <div
+            class="text-center p-8 bg-gradient-to-br from-secondary/10 to-accent/10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 tilt-card reveal">
+            <i class="fas fa-globe text-5xl text-secondary mb-4"></i>
+            <div class="text-5xl font-bold gradient-text counter" data-target="5">0</div>
+            <p class="text-sm mt-2 text-gray-600 dark:text-gray-300 font-semibold">Countries Worked</p>
           </div>
-        </li>
-        <li class="flex items-start">
-          <i class="fas fa-car text-accent text-2xl mt-1 mr-4"></i>
-          <div>
-            <p class="font-medium">Driving License</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              Car &amp; Bike Holder
-            </p>
+
+          <!-- Stat 4: Client Satisfaction -->
+          <div
+            class="text-center p-8 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 tilt-card reveal">
+            <i class="fas fa-star text-5xl text-highlight mb-4"></i>
+            <div class="text-5xl font-bold gradient-text counter" data-target="100">0</div>
+            <p class="text-sm mt-2 text-gray-600 dark:text-gray-300 font-semibold">Client Satisfaction %</p>
           </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+        </div>
+      </div>
+    </section>
 
 
 
-<section id="experience" class="min-h-screen bg-white dark:bg-gray-900 py-16 px-6 relative">
- <h2 class="text-3xl font-bold text-accent mb-8 text-center">
-   <i class="fas fa-briefcase mr-2"></i>Experience
- </h2>
+    <section id="experience" class="min-h-screen bg-white dark:bg-gray-900 py-16 px-6 relative">
+      <h2 class="text-3xl font-bold text-accent mb-8 text-center">
+        <i class="fas fa-briefcase mr-2"></i>Experience
+      </h2>
 
- <!-- Tabs & Connector -->
- <div class="max-w-4xl mx-auto mb-8">
-   <div class="flex justify-center space-x-12 mb-2">
-     <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="0">Current</button>
-     <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="1">2022</button>
-     <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="2">2016</button>
-   </div>
-   <div class="w-full h-px bg-gray-300 dark:bg-gray-600"></div>
- </div>
+      <!-- Tabs & Connector -->
+      <div class="max-w-4xl mx-auto mb-8">
+        <div class="flex justify-center space-x-12 mb-2">
+          <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="0">Current</button>
+          <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="1">2022</button>
+          <button class="tab-btn px-6 py-2 rounded-full transition" data-tab="2">2016</button>
+        </div>
+        <div class="w-full h-px bg-gray-300 dark:bg-gray-600"></div>
+      </div>
 
- <!-- Prev/Next -->
- <button id="prevExp" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl text-gray-400 hover:text-accent transition">
-   <i class="fas fa-chevron-left"></i>
- </button>
- <button id="nextExp" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl text-gray-400 hover:text-accent transition">
-   <i class="fas fa-chevron-right"></i>
- </button>
+      <!-- Prev/Next -->
+      <button id="prevExp"
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl text-gray-400 hover:text-accent transition">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="nextExp"
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl text-gray-400 hover:text-accent transition">
+        <i class="fas fa-chevron-right"></i>
+      </button>
 
- <!-- Cards Container -->
-<div id="experience-cards" class="max-w-7xl mx-auto space-y-20 px-4 md:px-12">
+      <!-- Cards Container -->
+      <div id="experience-cards" class="max-w-7xl mx-auto space-y-20 px-4 md:px-12">
 
-   <!-- Card 0: Current -->
-   <div class="experience-card hidden animate-fadeIn" data-index="0">
-     <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
-       <!-- LEFT COLUMN -->
-       <div class="flex flex-col space-y-6 h-full">
-         <!-- Employers -->
-         <div class="flex justify-center items-center space-x-8">
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="alten.png" alt="ALTEN" class="max-h-full max-w-full object-contain">
-           </div>
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="dematic.png" alt="Dematic" class="max-h-full max-w-full object-contain">
-           </div>
-         </div>
-         <!-- Video -->
-         <video src="crossbelt.mp4" autoplay muted loop playsinline
+        <!-- Card 0: Current -->
+        <div class="experience-card hidden animate-fadeIn" data-index="0">
+          <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
+            <!-- LEFT COLUMN -->
+            <div class="flex flex-col space-y-6 h-full">
+              <!-- Employers -->
+              <div class="flex justify-center items-center space-x-8">
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="alten.png" alt="ALTEN" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="dematic.png" alt="Dematic" class="max-h-full max-w-full object-contain">
+                </div>
+              </div>
+              <!-- Video -->
+              <video src="crossbelt.mp4" autoplay muted loop playsinline
                 class="w-full h-[360px] object-cover rounded-lg shadow-lg flex-shrink-0"></video>
-       </div>
-       <!-- RIGHT COLUMN -->
-       <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
-         <div class="space-y-4 overflow-y-auto">
-           <h3 class="text-2xl font-bold">Senior Project &amp; Commissioning Engineer</h3>
-           <p class="text-sm text-gray-500 dark:text-gray-300">ALTEN Italia / Dematic · 2022 – Present</p>
-           <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
-             <li>Led full‐cycle commissioning of cross‐belt sorter systems (FAT to SAT) across Amazon, Zara, DHL &amp; ECI warehouses.</li>
-             <li>Managed project schedules, budgets and coordinated electrical, mechanical and IT subcontractors.</li>
-             <li>Configured PLC, HMI &amp; SCADA integrations; validated network topology and communication protocols.</li>
-             <li>Performed system functional tests, troubleshooting and performance tuning to meet throughput targets.</li>
-             <li>Delivered handover documentation and trained client maintenance teams on operation &amp; preventive maintenance.</li>
-           </ul>
-         </div>
-         <div class="mt-6">
-           <p class="font-semibold mb-2">Clients / Locations Worked:</p>
-           <div class="flex flex-wrap gap-6">
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="amazon.png" alt="Amazon" class="max-h-full max-w-full object-contain">
-             </div>
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="zara.png" alt="Zara" class="max-h-full max-w-full object-contain">
-             </div>
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="dhl.png" alt="DHL" class="max-h-full max-w-full object-contain">
-             </div>
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="eci.png" alt="ECI" class="max-h-full max-w-full object-contain">
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
+            </div>
+            <!-- RIGHT COLUMN -->
+            <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
+              <div class="space-y-4 overflow-y-auto">
+                <h3 class="text-2xl font-bold">Senior Project &amp; Commissioning Engineer</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">ALTEN Italia / Dematic · 2022 – Present</p>
+                <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
+                  <li>Led full‐cycle commissioning of cross‐belt sorter systems (FAT to SAT) across Amazon, Zara, DHL
+                    &amp; ECI warehouses.</li>
+                  <li>Managed project schedules, budgets and coordinated electrical, mechanical and IT subcontractors.
+                  </li>
+                  <li>Configured PLC, HMI &amp; SCADA integrations; validated network topology and communication
+                    protocols.</li>
+                  <li>Performed system functional tests, troubleshooting and performance tuning to meet throughput
+                    targets.</li>
+                  <li>Delivered handover documentation and trained client maintenance teams on operation &amp;
+                    preventive maintenance.</li>
+                </ul>
+              </div>
+              <div class="mt-6">
+                <p class="font-semibold mb-2">Clients / Locations Worked:</p>
+                <div class="flex flex-wrap gap-6">
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="amazon.png" alt="Amazon" class="max-h-full max-w-full object-contain">
+                  </div>
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="zara.png" alt="Zara" class="max-h-full max-w-full object-contain">
+                  </div>
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="dhl.png" alt="DHL" class="max-h-full max-w-full object-contain">
+                  </div>
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="eci.png" alt="ECI" class="max-h-full max-w-full object-contain">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-   <!-- Card 1: 2022 -->
-   <div class="experience-card hidden animate-fadeIn" data-index="1">
-     <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
-       <div class="flex flex-col space-y-6 h-full">
-         <div class="flex justify-center items-center space-x-8">
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="alten.png" alt="ALTEN" class="max-h-full max-w-full object-contain">
-           </div>
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="dematic.png" alt="Dematic" class="max-h-full max-w-full object-contain">
-           </div>
-         </div>
-         <video src="wcs_demo.mp4" autoplay muted loop playsinline
+        <!-- Card 1: 2022 -->
+        <div class="experience-card hidden animate-fadeIn" data-index="1">
+          <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
+            <div class="flex flex-col space-y-6 h-full">
+              <div class="flex justify-center items-center space-x-8">
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="alten.png" alt="ALTEN" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="dematic.png" alt="Dematic" class="max-h-full max-w-full object-contain">
+                </div>
+              </div>
+              <video src="wcs_demo.mp4" autoplay muted loop playsinline
                 class="w-full h-[360px] object-cover rounded-lg shadow-lg flex-shrink-0"></video>
-       </div>
-       <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
-         <div class="space-y-4 overflow-y-auto">
-           <h3 class="text-2xl font-bold">Material Handling IT Specialist</h3>
-           <p class="text-sm text-gray-500 dark:text-gray-300">Dematic · 2022 – 2024</p>
-           <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
-             <li>Configured and deployed Dematic WCS modules; integrated with Mysql and Grafana</li>
-             <li>Developed custom scripts and interfaces for data exchange, reporting and device diagnostics.</li>
-             <li>Managed site networks, servers and PLC communication layers for uninterrupted material flow.</li>
-             <li>Provided 24/7 on‐site &amp; remote support; reduced system downtime by 30% through proactive monitoring.</li>
-             <li>Collaborated with Kering &amp; Despar teams to optimize picking routes and system throughput.</li>
-           </ul>
-         </div>
-         <div class="mt-6">
-           <p class="font-semibold mb-2">Clients / Locations Worked:</p>
-           <div class="flex flex-wrap gap-6">
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="kering.png" alt="Kering" class="max-h-full max-w-full object-contain">
-             </div>
-             <div class="h-24 w-36 flex items-center justify-center">
-               <img src="despar.png" alt="Despar" class="max-h-full max-w-full object-contain">
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
+            </div>
+            <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
+              <div class="space-y-4 overflow-y-auto">
+                <h3 class="text-2xl font-bold">Material Handling IT Specialist</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">Dematic · 2022 – 2024</p>
+                <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
+                  <li>Configured and deployed Dematic WCS modules; integrated with Mysql and Grafana</li>
+                  <li>Developed custom scripts and interfaces for data exchange, reporting and device diagnostics.</li>
+                  <li>Managed site networks, servers and PLC communication layers for uninterrupted material flow.</li>
+                  <li>Provided 24/7 on‐site &amp; remote support; reduced system downtime by 30% through proactive
+                    monitoring.</li>
+                  <li>Collaborated with Kering &amp; Despar teams to optimize picking routes and system throughput.</li>
+                </ul>
+              </div>
+              <div class="mt-6">
+                <p class="font-semibold mb-2">Clients / Locations Worked:</p>
+                <div class="flex flex-wrap gap-6">
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="kering.png" alt="Kering" class="max-h-full max-w-full object-contain">
+                  </div>
+                  <div class="h-24 w-36 flex items-center justify-center">
+                    <img src="despar.png" alt="Despar" class="max-h-full max-w-full object-contain">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-   <!-- Card 2: 2016 -->
-   <div class="experience-card hidden animate-fadeIn" data-index="2">
-     <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
-       <div class="flex flex-col space-y-6 h-full">
-         <div class="flex justify-center items-center space-x-8">
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="tcs.png" alt="TCS" class="max-h-full max-w-full object-contain">
-           </div>
-           <div class="h-32 w-64 flex items-center justify-center">
-             <img src="usaa.png" alt="USAA" class="max-h-full max-w-full object-contain">
-           </div>
-         </div>
-         <video src="server_ops.mp4" autoplay muted loop playsinline
+        <!-- Card 2: 2016 -->
+        <div class="experience-card hidden animate-fadeIn" data-index="2">
+          <div class="md:grid md:grid-cols-2 gap-8 h-full items-stretch">
+            <div class="flex flex-col space-y-6 h-full">
+              <div class="flex justify-center items-center space-x-8">
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="tcs.png" alt="TCS" class="max-h-full max-w-full object-contain">
+                </div>
+                <div class="h-32 w-64 flex items-center justify-center">
+                  <img src="usaa.png" alt="USAA" class="max-h-full max-w-full object-contain">
+                </div>
+              </div>
+              <video src="server_ops.mp4" autoplay muted loop playsinline
                 class="w-full h-[360px] object-cover rounded-lg shadow-lg flex-shrink-0"></video>
-       </div>
-       <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
-         <div class="space-y-4 overflow-y-auto">
-           <h3 class="text-2xl font-bold">System Engineer</h3>
-           <p class="text-sm text-gray-500 dark:text-gray-300">TCS · 2016 – 2018</p>
-           <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
-             <li>Maintained Windows Server &amp; Linux environments for USAA, including Virtualisation & backup validation.</li>
-             <li>Managed VMware &amp; Hyper-V virtualization platforms, configuring SAN storage and resource pools.</li>
-             <li>Automated routine tasks with PowerShell &amp; Bash scripts to improve deployment consistency.</li>
-             <li>Monitored system health via SCOM and reduced incident response time by 25%. </li>
-             <li>Collaborated with security teams on change management (service Now)and compliance (ISO 27001).</li>
-           </ul>
-         </div>
-         <div class="mt-6">
-           <p class="font-semibold mb-2">Clients / Locations Worked:</p>
-           <div class="flex flex-wrap gap-6">
-             <!-- add logos if available -->
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
+            </div>
+            <div class="flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 h-full">
+              <div class="space-y-4 overflow-y-auto">
+                <h3 class="text-2xl font-bold">System Engineer</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-300">TCS · 2016 – 2018</p>
+                <ul class="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-200">
+                  <li>Maintained Windows Server &amp; Linux environments for USAA, including Virtualisation & backup
+                    validation.</li>
+                  <li>Managed VMware &amp; Hyper-V virtualization platforms, configuring SAN storage and resource pools.
+                  </li>
+                  <li>Automated routine tasks with PowerShell &amp; Bash scripts to improve deployment consistency.</li>
+                  <li>Monitored system health via SCOM and reduced incident response time by 25%. </li>
+                  <li>Collaborated with security teams on change management (service Now)and compliance (ISO 27001).
+                  </li>
+                </ul>
+              </div>
+              <div class="mt-6">
+                <p class="font-semibold mb-2">Clients / Locations Worked:</p>
+                <div class="flex flex-wrap gap-6">
+                  <!-- add logos if available -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
- </div>
-</section>
-
-
-<script>
-  const tabs = document.querySelectorAll('.tab-btn');
-  const cards = document.querySelectorAll('.experience-card');
-  let current = 0;
-  function showCard(i) {
-    cards.forEach(c => c.classList.add('hidden'));
-    cards[i].classList.remove('hidden');
-    tabs.forEach(b => b.classList.remove('active','bg-accent','text-white'));
-    tabs[i].classList.add('active','bg-accent','text-white');
-    current = i;
-  }
-  tabs.forEach((b,i) => b.addEventListener('click', ()=> showCard(i)));
-  document.getElementById('prevExp').onclick = () => showCard((current + cards.length - 1) % cards.length);
-  document.getElementById('nextExp').onclick = () => showCard((current + 1) % cards.length);
-  showCard(0);
-</script>
-
-  <section
-  id="education"
-  class="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-6"
-  style="scroll-snap-align: start;"
->
-  <h2 class="text-3xl font-bold text-accent mb-12 text-center">
-    <i class="fas fa-graduation-cap mr-2"></i>Education
-  </h2>
-
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 animate-slideIn">
-
-    <!-- MSc Card -->
-    <div class="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 hover:shadow-2xl transition-transform transform hover:scale-105">
-      <!-- Logo -->
-      <div class="h-150 w-90 mb-6 flex items-center justify-center">
-        <img
-          src="polimi.png"
-          alt="Politecnico di Milano"
-          class="max-h-full max-w-full object-contain"
-        />
       </div>
-      <!-- Content -->
-      <div class="w-full text-center space-y-4">
-        <h3 class="text-2xl font-bold">MSc in Mechanical Engineering</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-300">
-          Politecnico di Milano, Milan, Italy
-        </p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">
-          Sep 2018 – Dec 2021
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 space-y-1 text-left">
-          <li><strong>Thesis:</strong> Analysis &amp; Simulation of Blade Loads of a Scaled Wind Turbine Model</li>
-          <li><strong>Key Courses:</strong> Automation &amp; Control Engineering; Mechanical Dynamics; Signal Processing; Management Engineering</li>
-        </ul>
+    </section>
+
+
+    <section id="education" class="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-6"
+      style="scroll-snap-align: start;">
+      <h2 class="text-3xl font-bold text-accent mb-12 text-center">
+        <i class="fas fa-graduation-cap mr-2"></i>Education
+      </h2>
+
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 animate-slideIn">
+
+        <!-- MSc Card -->
+        <div
+          class="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 hover:shadow-2xl transition-transform transform hover:scale-105">
+          <!-- Logo -->
+          <div class="h-150 w-90 mb-6 flex items-center justify-center">
+            <img src="polimi.png" alt="Politecnico di Milano" class="max-h-full max-w-full object-contain" />
+          </div>
+          <!-- Content -->
+          <div class="w-full text-center space-y-4">
+            <h3 class="text-2xl font-bold">MSc in Mechanical Engineering</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-300">
+              Politecnico di Milano, Milan, Italy
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-300">
+              Sep 2018 – Dec 2021
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 space-y-1 text-left">
+              <li><strong>Thesis:</strong> Analysis &amp; Simulation of Blade Loads of a Scaled Wind Turbine Model</li>
+              <li><strong>Key Courses:</strong> Automation &amp; Control Engineering; Mechanical Dynamics; Signal
+                Processing; Management Engineering</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BE Card -->
+        <div
+          class="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 hover:shadow-2xl transition-transform transform hover:scale-105">
+          <!-- Logo -->
+          <div class="h-120 w-80 mb-6 flex items-center justify-center">
+            <img src="anna_univ.png" alt="Anna University" class="max-h-full max-w-full object-contain" />
+          </div>
+          <!-- Content -->
+          <div class="w-full text-center space-y-4">
+            <h3 class="text-2xl font-bold">B.Eng in Mechanical Engineering</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-300">
+              Anna University, Chennai, India
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-300">
+              Aug 2012 – May 2016
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 space-y-1 text-left">
+              <li><strong>Thesis:</strong> Wear Properties of Metal Matrix Composites (Al+B₄C+Mica)</li>
+              <li><strong>Project:</strong> Design &amp; Fabrication of a Portable Plastic Injection Molding Machine
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
-    <!-- BE Card -->
-    <div class="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 hover:shadow-2xl transition-transform transform hover:scale-105">
-      <!-- Logo -->
-      <div class="h-120 w-80 mb-6 flex items-center justify-center">
-        <img
-          src="anna_univ.png"
-          alt="Anna University"
-          class="max-h-full max-w-full object-contain"
-        />
+
+    <section id="projects" class="min-h-screen bg-white dark:bg-gray-900 py-20 px-6" style="scroll-snap-align: start;">
+      <h2 class="text-3xl font-bold text-accent mb-8 text-center">
+        <i class="fas fa-folder-open mr-2"></i>Projects
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto animate-slideIn">
+
+        <!-- 1. Retrofitting -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="retrofit.jpg" alt="Retrofitting" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Industrial Machine Retrofitting
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Migrated Interbus/Profibus to Profinet for Zara &amp; El Corte Inglés.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>Updated interfaces, gateways &amp; software signals.</li>
+              <li>Re‑mapped PLC & SCADA tags with zero downtime.</li>
+              <li>Validated via FAT/SAT and delivered handover documentation.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. Commissioning -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="commissioning.jpg" alt="Commissioning" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Amazon Site Commissioning
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              FAT, SAT &amp; go‑live at PAD2, HAJ1 (DE) &amp; PSP3 (USA) with full handover.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>Developed comprehensive test scripts and checklists.</li>
+              <li>Provided peak‑period support &amp; on‑site training.</li>
+              <li>Awarded “Excellence in Commissioning” for seamless launch.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. SCADA -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="scada.jpg" alt="SCADA Interface" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Automated Warehouse SCADA
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Uwamp, MySQL &amp; JavaScript UI for Dematic sorter control and monitoring.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>WebSocket–PLC integration for sub‑second updates.</li>
+              <li>Interactive layout of sorter zones &amp; alarm handling.</li>
+              <li>Remote start/stop/test routines for maintenance teams.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Grafana -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="grafana.jpg" alt="Grafana Dashboard" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Grafana Dashboards
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Real‑time time‑series dashboards for plant commissioning insights.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>Custom panels tracking throughput, errors &amp; OEE.</li>
+              <li>Alert rules via Prometheus for immediate notifications.</li>
+              <li>Role‑based access control for secure data views.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Intelligent Logistics -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="logistic.gif" alt="Logistics Platform" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Intelligent Logistics Platform
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Interactive web tool for GXO/Kering to manage automated order flows end‑to‑end.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>Bulk order upload &amp; batch dispatch planning.</li>
+              <li>Real‑time SKU tracking with color‑coded tables.</li>
+              <li>Integrated analytics: cycle‑time histograms &amp; trend charts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. OCR & AI Tool -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
+          <img src="ocr.gif" alt="AI OCR Tool" class="w-full h-40 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-accent mb-2">
+              Clicks &amp; OCR AI Tool
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Desktop app for macro recording, OCR extraction &amp; handwritten‑digit recognition.
+            </p>
+            <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
+              <li>Mouse‑click scripting for repetitive workflows.</li>
+              <li>Tesseract‑based OCR with custom training for invoice data.</li>
+              <li>Neural‑network classifier for handwritten digits.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
-      <!-- Content -->
-      <div class="w-full text-center space-y-4">
-        <h3 class="text-2xl font-bold">B.Eng in Mechanical Engineering</h3>
-        <p class="text-sm text-gray-500 dark:text-gray-300">
-          Anna University, Chennai, India
-        </p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">
-          Aug 2012 – May 2016
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 space-y-1 text-left">
-          <li><strong>Thesis:</strong> Wear Properties of Metal Matrix Composites (Al+B₄C+Mica)</li>
-          <li><strong>Project:</strong> Design &amp; Fabrication of a Portable Plastic Injection Molding Machine</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
+    </section>
 
 
-<section
-  id="projects"
-  class="min-h-screen bg-white dark:bg-gray-900 py-20 px-6"
-  style="scroll-snap-align: start;"
->
-  <h2 class="text-3xl font-bold text-accent mb-8 text-center">
-    <i class="fas fa-folder-open mr-2"></i>Projects
-  </h2>
-
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto animate-slideIn">
-
-    <!-- 1. Retrofitting -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="retrofit.jpg" alt="Retrofitting" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Industrial Machine Retrofitting
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Migrated Interbus/Profibus to Profinet for Zara &amp; El Corte Inglés.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>Updated interfaces, gateways &amp; software signals.</li>
-          <li>Re‑mapped PLC & SCADA tags with zero downtime.</li>
-          <li>Validated via FAT/SAT and delivered handover documentation.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 2. Commissioning -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="commissioning.jpg" alt="Commissioning" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Amazon Site Commissioning
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          FAT, SAT &amp; go‑live at PAD2, HAJ1 (DE) &amp; PSP3 (USA) with full handover.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>Developed comprehensive test scripts and checklists.</li>
-          <li>Provided peak‑period support &amp; on‑site training.</li>
-          <li>Awarded “Excellence in Commissioning” for seamless launch.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 3. SCADA -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="scada.jpg" alt="SCADA Interface" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Automated Warehouse SCADA
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Uwamp, MySQL &amp; JavaScript UI for Dematic sorter control and monitoring.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>WebSocket–PLC integration for sub‑second updates.</li>
-          <li>Interactive layout of sorter zones &amp; alarm handling.</li>
-          <li>Remote start/stop/test routines for maintenance teams.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 4. Grafana -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="grafana.jpg" alt="Grafana Dashboard" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Grafana Dashboards
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Real‑time time‑series dashboards for plant commissioning insights.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>Custom panels tracking throughput, errors &amp; OEE.</li>
-          <li>Alert rules via Prometheus for immediate notifications.</li>
-          <li>Role‑based access control for secure data views.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5. Intelligent Logistics -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="logistic.gif" alt="Logistics Platform" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Intelligent Logistics Platform
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Interactive web tool for GXO/Kering to manage automated order flows end‑to‑end.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>Bulk order upload &amp; batch dispatch planning.</li>
-          <li>Real‑time SKU tracking with color‑coded tables.</li>
-          <li>Integrated analytics: cycle‑time histograms &amp; trend charts.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 6. OCR & AI Tool -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition overflow-hidden">
-      <img src="ocr.gif" alt="AI OCR Tool" class="w-full h-40 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-semibold text-accent mb-2">
-          Clicks &amp; OCR AI Tool
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Desktop app for macro recording, OCR extraction &amp; handwritten‑digit recognition.
-        </p>
-        <ul class="list-disc ml-5 text-gray-700 dark:text-gray-200 text-xs space-y-1">
-          <li>Mouse‑click scripting for repetitive workflows.</li>
-          <li>Tesseract‑based OCR with custom training for invoice data.</li>
-          <li>Neural‑network classifier for handwritten digits.</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
- <!-- SKILLS -->
+    <!-- SKILLS -->
     <section id="skills" class="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-6">
       <h2 class="text-3xl font-bold text-accent mb-8 text-center"><i class="fas fa-cogs mr-2"></i>Skills</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-slideIn">
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fab fa-python text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">Python</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-database text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">SQL</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-chart-bar text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">Power BI</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-chart-line text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">Grafana</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-microchip text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">SCADA</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-plug text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">Siemens PLC</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-project-diagram text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">Node-RED</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
-      <i class="fas fa-wave-square text-6xl text-accent mb-4 opacity-95"></i>
-      <h4 class="font-bold text-lg mb-2">MATLAB</h4>
-      <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
-    </div>
-  </div>
-</section>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fab fa-python text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Python</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-database text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">SQL</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-chart-bar text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Power BI</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-chart-line text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Grafana</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-microchip text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">SCADA</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★★☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-plug text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Siemens PLC</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-project-diagram text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Node-RED</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-wave-square text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">MATLAB</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+          <i class="fas fa-microchip text-6xl text-accent mb-4 opacity-95"></i>
+          <h4 class="font-bold text-lg mb-2">Allen Bradley Studio</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">★★★☆☆</p>
+        </div>
+      </div>
+    </section>
 
-<!-- CONTACT -->
+    <!-- CONTACT -->
     <section id="contact" class="min-h-screen bg-white dark:bg-gray-900 py-20 px-6">
       <h2 class="text-3xl font-bold text-accent mb-8 text-center"><i class="fas fa-envelope mr-2"></i>Contact</h2>
       <ul class="grid sm:grid-cols-2 gap-8 text-lg animate-slideIn">
-    <li class="flex items-center space-x-4">
-      <i class="fas fa-map-marker-alt text-4xl text-accent opacity-95"></i>
-      <span class="text-lg">Milan, Italy</span>
-    </li>
-    <li class="flex items-center space-x-4">
-      <i class="fas fa-phone text-4xl text-accent opacity-95"></i>
-      <span class="text-lg">+39 349 5133 8764</span>
-    </li>
-    <li class="flex items-center space-x-4">
-      <i class="fas fa-envelope text-4xl text-accent opacity-95"></i>
-      <a href="mailto:rahulbharathg95@live.com" class="underline text-lg">rahulbharathg95@live.com</a>
-    </li>
-    <li class="flex items-center space-x-4">
-      <i class="fab fa-linkedin text-4xl text-accent opacity-95"></i>
-      <a href="https://linkedin.com/in/rahul-bharath" target="_blank" class="underline text-lg">LinkedIn</a>
-    </li>
-    <li class="flex items-center space-x-4">
-      <i class="fab fa-github text-4xl text-accent opacity-95"></i>
-      <a href="https://github.com/rahulbharathkg" target="_blank" class="underline text-lg">GitHub</a>
-    </li>
-  </ul>
-</section>
+        <li class="flex items-center space-x-4">
+          <i class="fas fa-map-marker-alt text-4xl text-accent opacity-95"></i>
+          <span class="text-lg">Milan, Italy</span>
+        </li>
+        <li class="flex items-center space-x-4">
+          <i class="fas fa-phone text-4xl text-accent opacity-95"></i>
+          <span class="text-lg">+39 349 5133 8764</span>
+        </li>
+        <li class="flex items-center space-x-4">
+          <i class="fas fa-envelope text-4xl text-accent opacity-95"></i>
+          <a href="mailto:rahulbharathg95@live.com" class="underline text-lg">rahulbharathg95@live.com</a>
+        </li>
+        <li class="flex items-center space-x-4">
+          <i class="fab fa-linkedin text-4xl text-accent opacity-95"></i>
+          <a href="https://linkedin.com/in/rahul-bharath" target="_blank" class="underline text-lg">LinkedIn</a>
+        </li>
+        <li class="flex items-center space-x-4">
+          <i class="fab fa-github text-4xl text-accent opacity-95"></i>
+          <a href="https://github.com/rahulbharathkg" target="_blank" class="underline text-lg">GitHub</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    // ============================================
+    // PARTICLE BACKGROUND ANIMATION
+    // ============================================
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // ============================================
+    // SCROLL PROGRESS BAR
+    // ============================================
+    function updateScrollProgress() {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+
+    // ============================================
+    // INTERSECTION OBSERVER FOR ANIMATIONS
+    // ============================================
+    function setupIntersectionObserver() {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slideIn');
+            entry.target.style.opacity = '1';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections and cards
+      document.querySelectorAll('section, .job, .education-item, .skill-category').forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+    }
+
+    // ============================================
+    // SMOOTH SCROLL FOR NAVIGATION
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ============================================
+    // ENHANCED DARK MODE TOGGLE
+    // ============================================
+    const darkModeToggle = document.querySelector('button[onclick*="dark"]');
+    if (darkModeToggle) {
+      darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      darkModeToggle.addEventListener('click', function () {
+        const isDark = document.documentElement.classList.contains('dark');
+        this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      });
+    }
+
+    // ============================================
+    // TYPING EFFECT FOR TAGLINE
+    // ============================================
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.textContent = '';
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      type();
+    }
+
+    // ============================================
+    // INITIALIZE ON LOAD
+    // ============================================
+    window.addEventListener('load', function () {
+      createParticles();
+      updateScrollProgress();
+      setupIntersectionObserver();
+
+      // Typing effect for tagline
+      const tagline = document.querySelector('#home p.text-xl');
+      if (tagline) {
+        const originalText = tagline.textContent;
+        setTimeout(() => typeWriter(tagline, originalText, 50), 500);
+      }
+    });
+
+    // Update scroll progress on scroll
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // ============================================
+    // EXPERIENCE TABS (Existing functionality)
+    // ============================================
+    const tabs = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.experience-card');
+    let current = 0;
+
+    function showCard(i) {
+      cards.forEach(c => c.classList.add('hidden'));
+      cards[i].classList.remove('hidden');
+      tabs.forEach(b => b.classList.remove('active', 'bg-accent', 'text-white'));
+      tabs[i].classList.add('active', 'bg-accent', 'text-white');
+      current = i;
+    }
+
+    tabs.forEach((b, i) => b.addEventListener('click', () => showCard(i)));
+
+    const prevBtn = document.getElementById('prevExp');
+    const nextBtn = document.getElementById('nextExp');
+
+    if (prevBtn) prevBtn.onclick = () => showCard((current + cards.length - 1) % cards.length);
+    if (nextBtn) nextBtn.onclick = () => showCard((current + 1) % cards.length);
+
+    showCard(0);
+
+    // ============================================
+    // SKILL CARDS HOVER EFFECT
+    // ============================================
+    document.querySelectorAll('.hover\\:scale-105').forEach(card => {
+      card.addEventListener('mouseenter', function () {
+        this.style.transform = 'scale(1.05) rotate(1deg)';
+      });
+      card.addEventListener('mouseleave', function () {
+        this.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
+
+    // ============================================
+    // PARALLAX EFFECT FOR IMAGES
+    // ============================================
+    window.addEventListener('scroll', function () {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('img, video');
+
+      parallaxElements.forEach(el => {
+        const speed = 0.5;
+        const yPos = -(scrolled * speed);
+        el.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+
+    // ============================================
+    // RESUME BUTTON PULSE ANIMATION
+    // ============================================
+    const resumeButtons = document.querySelectorAll('a[href*="resume"]');
+    resumeButtons.forEach(btn => {
+      setInterval(() => {
+        btn.classList.add('animate-pulse');
+        setTimeout(() => btn.classList.remove('animate-pulse'), 1000);
+      }, 5000);
+    });
+  </script>
+
+  <!-- Advanced Features Script -->
+  <script src="advanced-features.js"></script>
 
 </body>
+
 </html>

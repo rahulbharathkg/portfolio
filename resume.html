@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAHUL BHARATH KRISHNI GURUMOORTHY - Professional Resume</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            /* Soft Professional Color Palette */
+            --primary: #2c5282;
+            --primary-light: #4299e1;
+            --primary-dark: #1a365d;
+            --secondary: #2d3748;
+            --accent: #38b2ac;
+            --accent-warm: #ed8936;
+            --company-color: #16a085;
+            --bg-slate: #f7fafc;
+            --sidebar-bg: #2c5282;
+            --sidebar-text: #ffffff;
+            --text-dark: #1a202c;
+            --text-main: #4a5568;
+            --text-light: #718096;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --exp-bg: rgba(226, 232, 240, 0.25);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: var(--text-main);
+            line-height: 1.18;
+            font-size: 8.1pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* STRICT 1-Page A4 Setup */
+        .page-container {
+            width: 210mm;
+            margin: 0 auto;
+        }
+
+        .resume-page {
+            width: 210mm;
+            height: 297mm;
+            background: var(--white);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            margin: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+
+            .page-container {
+                margin: 0;
+                width: 100%;
+            }
+
+            .resume-page {
+                margin: 0;
+                box-shadow: none;
+            }
+
+            @page {
+                margin: 0;
+                size: A4;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 205px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            padding: 22px 14px 5px 14px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-branding {
+            text-align: center;
+        }
+
+        .sidebar-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .sidebar-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.68rem;
+            color: var(--accent-warm);
+            font-weight: 600;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .profile-photo {
+            width: 125px;
+            height: 125px;
+            aspect-ratio: 1 / 1;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 8px auto;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .sidebar-section {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--white);
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid var(--accent-warm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-section h3 i {
+            color: var(--accent-warm);
+            font-size: 0.75rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 6px;
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .info-item i {
+            color: var(--accent-warm);
+            width: 14px;
+            text-align: center;
+            margin-top: 2px;
+            font-size: 0.85rem;
+        }
+
+        .info-item a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.74rem;
+            margin-bottom: 3px;
+            color: rgba(255, 255, 255, 0.92);
+            line-height: 1.2;
+        }
+
+        .status-item i {
+            color: var(--accent-warm);
+            width: 14px;
+            text-align: center;
+            margin-top: 2px;
+            font-size: 0.8rem;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.74rem;
+            margin-bottom: 3px;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .lang-level {
+            font-weight: 700;
+            color: var(--accent-warm);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            padding: 1.5px 7px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.64rem;
+            margin-right: 3px;
+            margin-bottom: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-bullet {
+            font-size: 0.7rem;
+            margin-bottom: 3px;
+            position: relative;
+            padding-left: 0px;
+            color: rgba(255, 255, 255, 0.92);
+            line-height: 1.3;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 22px 20px 5px 30px;
+            background: var(--white);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            padding-bottom: 2px;
+            border-bottom: 2.5px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        .introduction-text {
+            font-size: 0.8rem;
+            color: var(--text-main);
+            text-align: justify;
+            margin-bottom: 1px;
+            line-height: 1.35;
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
+            padding-right: 8px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+
+        .exp-item {
+            margin-bottom: 5px;
+            padding: 5px 10px 6px 10px;
+            background: var(--exp-bg);
+            border-radius: 6px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .job-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.0rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 0px;
+        }
+
+        .company-meta-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1px;
+        }
+
+        .company-city-text {
+            font-size: 0.95rem;
+            color: var(--company-color);
+            font-weight: 800;
+        }
+
+        .job-date {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--secondary);
+            padding: 3px 10px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .exp-category {
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-top: 2px;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-bottom: 1.5px solid var(--border);
+            padding-bottom: 1px;
+        }
+
+        .exp-category i {
+            color: var(--primary);
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-left: 1px;
+        }
+
+        .bullet-list li {
+            font-size: 0.8rem;
+            margin-bottom: 1px;
+            position: relative;
+            padding-left: 18px;
+            line-height: 1.28;
+            color: var(--text-main);
+        }
+
+        .bullet-list li::before {
+            content: "\f0da";
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.8rem;
+            top: 1px;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .accent-hl {
+            color: var(--accent-warm);
+            font-weight: 700;
+        }
+
+        /* Education Grid */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .edu-item {
+            padding: 12px 14px;
+            background: var(--bg-slate);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+        }
+
+        .edu-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .edu-details {
+            font-size: 0.76rem;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-container">
+        <!-- SINGLE PAGE -->
+        <div class="resume-page">
+            <aside class="sidebar">
+                <div class="sidebar-branding">
+                    <h1 class="sidebar-name">RAHUL BHARATH KRISHNI GURUMOORTHY</h1>
+                    <p class="sidebar-title">Senior Project & Commissioning Engineer</p>
+                </div>
+                <div class="profile-photo"><img src="photo.png" alt="RAHUL BHARATH"></div>
+
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-address-book"></i> CONTACT</h3>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Milan, Italy</div>
+                    <div class="info-item"><i class="fas fa-phone-alt"></i> +39 349 5133 764</div>
+                    <div class="info-item"><i class="fas fa-envelope-open-text"></i> <a
+                            href="mailto:rahulbharathg95@live.com">rahulbharathg95@live.com</a></div>
+                    <div class="info-item"><i class="fas fa-external-link-alt"></i> <a
+                            href="https://rahulbharathkg.github.io/portfolio/" target="_blank">Portfolio Website</a>
+                    </div>
+                    <div class="info-item"><i class="fab fa-linkedin"></i> <a
+                            href="https://linkedin.com/in/rahul-bharath" target="_blank">in/rahul-bharath</a></div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-user-check"></i> STATUS</h3>
+                    <div class="status-item"><i class="fas fa-globe-europe"></i> Europe PR (Exp: 2033)</div>
+                    <div class="status-item"><i class="fas fa-passport"></i> USA B1/B2 (Exp: 2033)</div>
+                    <div class="status-item"><i class="fas fa-plane-arrival"></i> Canada Visa (Exp: 2034)</div>
+                    <div class="status-item"><i class="fas fa-id-badge"></i> Indian Citizen</div>
+                    <div class="status-item"><i class="fas fa-id-card"></i> Driver's License</div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-language"></i> LANGUAGES</h3>
+                    <div class="lang-item"><span>English</span> <span class="lang-level">Fluent</span></div>
+                    <div class="lang-item"><span>Italian</span> <span class="lang-level">Intermediate</span></div>
+                    <div class="lang-item"><span>German</span> <span class="lang-level">Basic A2</span></div>
+                    <div class="lang-item" style="margin-top: 5px;"><span
+                            style="color:var(--accent); font-weight:700;">NATIVE:</span></div>
+                    <div class="sidebar-bullet" style="color:var(--white); font-weight:700;">TAMIL / TELUGU / HINDI
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-certificate"></i> CERTIFICATIONS</h3>
+                    <div class="status-item"><i class="fas fa-code-branch"></i> SQL | Python | Data Sci.</div>
+                    <div class="status-item"><i class="fas fa-project-diagram"></i> Agile & Scrum Method.</div>
+                    <div class="status-item"><i class="fas fa-industry"></i> Factory Automation</div>
+                    <div class="status-item"><i class="fas fa-server"></i> Win Server 2016 Mgmt</div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h3><i class="fas fa-laptop-code"></i> TECHNICAL CORE</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                        <span class="skill-tag">Sycon.net</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">SCADA</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">AB and Siemens PLC</span>
+                        <span class="skill-tag">Logistics Management</span>
+                    </div>
+                </section>
+
+                <section class="sidebar-section" style="margin-bottom:0;">
+                    <h3><i class="fas fa-history"></i> INTERNSHIPS</h3>
+                    <div class="status-item" style="margin-bottom:5px;"><i class="fas fa-briefcase"></i> <span><span
+                                class="accent-hl">BA Engineering</span>, India.<br>Project Eng. (Dec 20-Apr 21)</span>
+                    </div>
+                    <div class="status-item" style="margin-bottom:5px;"><i class="fas fa-shield-alt"></i> <span><span
+                                class="accent-hl">Renault Nissan</span>, India.<br>Safety Eng. (Jun 15)</span></div>
+                    <div class="status-item" style="margin-bottom:0;"><i class="fas fa-train"></i> <span><span
+                                class="accent-hl">Indian Railways workshop</span>, chennai, India.<br>Eng.
+                            Training (Jul 14)</span></div>
+                </section>
+            </aside>
+
+            <main class="main-content">
+                <section>
+                    <h2 class="section-title"><i class="fas fa-user-tie"></i> Summary</h2>
+                    <p class="introduction-text">
+                        Dynamic and results-oriented Professional with over <span class="highlight">6 years experience
+                            and 4 years of hands-on
+                            experience</span> in the material handling and sortation industry. Specialist in the
+                        commissioning and management of modern <span class="highlight">Crossbelt sortation
+                            systems</span>. <span class="highlight">Proven track record</span> of delivering
+                        international projects on time
+                        and within budget, ensuring peak system performance and operational efficiency.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="section-title"><i class="fas fa-tools"></i> Experience</h2>
+                    <div class="exp-item">
+                        <h3 class="job-title">Senior Commissioning and Global project Engineer</h3>
+                        <div class="company-meta-line">
+                            <span class="company-city-text">ALTEN/DEMATIC, MILAN, ITALY.</span>
+                            <span class="job-date">Jun 2024 - Present</span>
+                        </div>
+
+                        <div class="exp-category"><i class="fas fa-cogs"></i> Commissioning</div>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">Amazon PSP3, BJC1, TOL3 (USA):</span> Full commissioning of
+                                <span class="highlight">Crossbelt Sorter</span> including calibration, regressive
+                                testing, software tool development, acceptance tests, high-volume testing, and
+                                production support.
+                            </li>
+                            <li><span class="highlight">Amazon PAD2 (Germany):</span> Delivered ahead of schedule by
+                                <span class="highlight">analyzing operational data</span>, identifying root causes, and
+                                implementing fixes until SAT.
+                            </li>
+                            <li><span class="highlight">DHL BZ81 (Germany):</span> Post-commissioning support including
+                                calibration, production monitoring, and project handover.</li>
+                        </ul>
+
+                        <div class="exp-category"><i class="fas fa-sync-alt"></i> Modernization</div>
+                        <ul class="bullet-list">
+                            <li><span class="highlight">Amazon HAJ1 (Germany):</span> Commissioned 10 new shipping
+                                chutes; <span class="highlight">20% cost savings</span> via dual-site
+                                management and timely completiong.</li>
+                            <li><span class="highlight">Zara (Spain):</span> Retrofitted 7 stations from <span
+                                    class="highlight">Profibus to Profinet</span>, achieving 15–20% cost savings.</li>
+                            <li><span class="highlight">ECI (Spain):</span> Supported site modernization (<span
+                                    class="highlight">Interbus to Profinet</span>), improving throughput and stability.
+                            </li>
+                        </ul>
+
+                        <div class="exp-category" style="margin-top: 10px;"><i class="fas fa-code"></i> Software
+                            Engineering</div>
+                        <ul class="bullet-list">
+                            <li>Developed <span class="highlight">Profinet Design</span> & I/O mappings for crossbelt
+                                systems; Prepared Electrical & Mechanical Documentation and consolidated site technical
+                                requirements.</li>
+                            <li>Tested <span class="highlight">QNX and Windows-based</span> control systems for
+                                reliability; developed automation tools and conducted <span class="highlight">R&D</span>
+                                for new equipment prototyping and future-proof scalability.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3 class="job-title">Highly Automated Logistics IT generalist</h3>
+                        <div class="company-meta-line">
+                            <span class="company-city-text">ALTEN/DEMATIC, MILAN, ITALY.</span>
+                            <span class="job-date">May 2022 - Jun 2024</span>
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Optimized <span class="highlight">WCS & order processes</span> at Kering and ASPIAG
+                                (SPAR Group) using Pouch Sortation and Multi-Shuttle systems.</li>
+                            <li>Redesigned software processes using <span class="highlight">SQL, Python, Power BI, and
+                                    Grafana</span>, improving overall performance and plant visualization.</li>
+                            <li>Developed an <span class="highlight">Intelligent Logistics Management Tool</span> with
+                                ChatGPT; integrated <span class="highlight">Siemens PLC and SCADA</span> systems.</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item" style="margin-bottom: 0;">
+                        <h3 class="job-title">System Engineer</h3>
+                        <div class="company-meta-line">
+                            <span class="company-city-text">Tata Consultancy Services-TCS, Chennai,India.</span>
+                            <span class="job-date">Sep 2016 - Feb 2018</span>
+                        </div>
+                        <ul class="bullet-list">
+                            <li>Managed maintenance and troubleshooting of the <span class="highlight">Windows Server
+                                    environment</span> for <span class="highlight">National Bank (USAA)</span>; Utilized
+                                expertise in <span class="highlight">Active Directory</span> to maintain security.</li>
+                            <li>Handled installation and routine checks of OS and hardware; Implemented robust <span
+                                    class="highlight">backup and disaster recovery</span> processes using RAID and <span
+                                    class="highlight">VMware</span> virtualization.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Academic Background</h2>
+                    <div class="edu-grid">
+                        <div class="edu-item">
+                            <h3 class="edu-title">MSc in Mechanical Engineering</h3>
+                            <div class="company-city-text" style="font-size: 0.74rem;">Politecnico di Milano, Italy.
+                                2018-2021</div>
+                            <div class="edu-details">
+                                <strong>Thesis:</strong> Analysis & Simulation of Blade Loads of a Scaled Wind Turbine
+                                Model.
+                                <strong>Courses:</strong> Automation & Control, Dynamics, Signal Processing.
+                            </div>
+                        </div>
+                        <div class="edu-item">
+                            <h3 class="edu-title">B.E in Mechanical Engineering</h3>
+                            <div class="company-city-text" style="font-size: 0.74rem;">Anna University, India. 2012-2016
+                            </div>
+                            <div class="edu-details">
+                                <strong>Thesis:</strong> Wear Properties of Metal Matrix Composites.
+                                <strong>Project:</strong> Portable Plastic Injection Molding Machine design.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>
